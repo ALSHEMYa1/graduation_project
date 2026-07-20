@@ -1,0 +1,19 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @media (prefers-color-scheme: light) {
+      .background { fill: #7c3aed; }
+      .foreground { fill: white; }
+      .foreground2 { fill: white; opacity: 0.4; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .background { fill: #a855f7; }
+      .foreground { fill: white; }
+      .foreground2 { fill: white; opacity: 0.4; }
+    }
+  </style>
+  <rect class="background" width="180" height="180" rx="37" />
+  <g transform="translate(90,90) scale(1.2) translate(-90,-90)">
+    <path class="foreground" d="M80 120L52 30h24l15 60 15-60h24l-28 90H80z" />
+    <path class="foreground2" d="M58 120L30 30h24l15 60 15-60h24l-28 90H58z" />
+  </g>
+</svg>

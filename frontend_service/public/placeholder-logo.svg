@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="60" viewBox="0 0 220 60" fill="none">
+  <defs>
+    <linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+  </defs>
+  <!-- Interlocking ASA monogram -->
+  <g transform="translate(2,4)">
+    <rect x="0" y="0" width="44" height="44" rx="10" fill="url(#brandGrad)" />
+    <!-- Left A -->
+    <path d="M8 36L14 8L20 36" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 26L18 26" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Right A -->
+    <path d="M24 36L30 8L36 36" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M26 26L34 26" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Interlocking S -->
+    <path d="M13 14Q25 8 28 18Q28 26 22 26Q16 26 14 30Q14 36 26 36" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- ASA text -->
+  <text x="54" y="29" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="22" font-weight="800" fill="currentColor" letter-spacing="2">ASA</text>
+  <!-- Tagline -->
+  <text x="54" y="45" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="9" fill="#94a3b8" letter-spacing="2.5" font-weight="500">AI STUDY ASSISTANT</text>
+</svg>

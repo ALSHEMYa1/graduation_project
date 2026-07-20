@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+openai
+dotenv
+pypdf
+Pillow
+pytesseract
+requests
+python-multipart
+sqlalchemy
+passlib[bcrypt]
+python-jose[cryptography]
+python-docx
+pymupdf
+google-auth
+google-auth-oauthlib
