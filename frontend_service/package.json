@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "mobile:build": "next build && npx cap sync",
+    "mobile:build": "set EXPORT=true && next build && npx cap sync",
     "mobile:android": "npx cap open android",
     "mobile:ios": "npx cap open ios",
     "mobile:copy": "npx cap copy"
