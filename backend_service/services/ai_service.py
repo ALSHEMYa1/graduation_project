@@ -1,7 +1,8 @@
+import os
 import requests
 from fastapi import HTTPException
 
-AI_URL = "http://127.0.0.1:5000"
+AI_URL = os.getenv("AI_SERVICE_URL", "http://127.0.0.1:5000")
 
 def call_ai(endpoint: str, data: dict):
     try:

@@ -4,7 +4,7 @@ import tempfile
 from pypdf import PdfReader
 from docx import Document as DocxDocument
 
-AI_SERVICE_URL = "http://127.0.0.1:5000"
+AI_SERVICE_URL = os.getenv("AI_SERVICE_URL", "http://127.0.0.1:5000")
 
 try:
     import pytesseract
