@@ -59,26 +59,13 @@ except Exception:
 app = FastAPI(title="Backend Service")
 
 # ================= CORS =================
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import Response
-
-class CORSMiddlewareCustom(BaseHTTPMiddleware):
-    async def dispatch(self, request, call_next):
-        if request.method == "OPTIONS":
-            return Response(
-                status_code=200,
-                headers={
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "*",
-                    "Access-Control-Allow-Headers": "*",
-                    "Access-Control-Max-Age": "86400",
-                }
-            )
-        response = await call_next(request)
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        return response
-
-app.add_middleware(CORSMiddlewareCustom)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ================= CONFIG =================
 UPLOAD_DIR = "./uploads"
