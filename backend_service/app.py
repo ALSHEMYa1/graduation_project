@@ -60,17 +60,22 @@ app = FastAPI(title="Backend Service")
 
 # ================= CORS =================
 from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.requests import Request
 from starlette.responses import Response
 
 class CORSMiddlewareCustom(BaseHTTPMiddleware):
-    async def dispatch(self, request: Request, call_next):
+    async def dispatch(self, request, call_next):
+        if request.method == "OPTIONS":
+            return Response(
+                status_code=200,
+                headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "*",
+                    "Access-Control-Allow-Headers": "*",
+                    "Access-Control-Max-Age": "86400",
+                }
+            )
         response = await call_next(request)
         response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = "*"
-        response.headers["Access-Control-Allow-Headers"] = "*"
-        if request.method == "OPTIONS":
-            return Response(status_code=200, headers=dict(response.headers))
         return response
 
 app.add_middleware(CORSMiddlewareCustom)
