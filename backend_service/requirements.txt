@@ -14,3 +14,4 @@ python-docx
 pymupdf
 google-auth
 google-auth-oauthlib
+psycopg2-binary
