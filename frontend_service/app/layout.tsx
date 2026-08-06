@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next'
-import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { I18nProvider } from '@/components/providers/i18n-provider'
@@ -40,8 +39,6 @@ export default function RootLayout({
             <Toaster richColors position="top-right" />
           </I18nProvider>
         </ThemeProvider>
-
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
