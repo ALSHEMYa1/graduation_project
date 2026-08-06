@@ -12,6 +12,7 @@ import { useI18n } from '@/components/providers/i18n-provider'
 import { LanguageSwitcher } from '@/components/layout/language-switcher'
 import { useTheme } from 'next-themes'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 import { API_URL } from '@/lib/config'
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''
@@ -19,6 +20,7 @@ const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''
 function LoginForm() {
   const { t, dir } = useI18n()
   const { theme, setTheme } = useTheme()
+  const router = useRouter()
 
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -48,9 +50,17 @@ function LoginForm() {
       localStorage.setItem('token_type', data.token_type)
 
       toast.success('Logged in successfully')
-      window.location.href = '/dashboard'
-    } catch {
-      toast.error('Login failed')
+      router.push('/dashboard')
+    } catch (err: any) {
+      const detail = err?.message || err
+      toast.error(`Login failed: ${detail} | URL: ${API_URL}`)
+      console.log('[LOGIN-DEBUG]', JSON.stringify({
+        url: API_URL,
+        name: err?.name,
+        message: err?.message,
+        cause: String(err?.cause || ''),
+        stack: String(err?.stack || '').split('\n')[1] || '',
+      }))
     } finally {
       setLoading(false)
     }
@@ -71,7 +81,7 @@ function LoginForm() {
       localStorage.setItem('token_type', data.token_type)
 
       toast.success('Logged in with Google')
-      window.location.href = '/dashboard'
+      router.push('/dashboard')
     } catch {
       toast.error('Google login failed')
     }

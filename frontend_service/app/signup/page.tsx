@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Eye, EyeOff, Moon, Sun } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -16,6 +17,7 @@ import { API_URL } from '@/lib/config'
 export default function SignupPage() {
   const { t, dir } = useI18n()
   const { theme, setTheme } = useTheme()
+  const router = useRouter()
 
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -49,7 +51,7 @@ export default function SignupPage() {
       }
 
       toast.success('Account created successfully')
-      window.location.href = '/login'
+      router.push('/login')
 
     } catch (err: any) {
       toast.error(err.message || 'Error creating account')
