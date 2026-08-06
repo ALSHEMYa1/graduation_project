@@ -1,13 +1,14 @@
 import os
 import shutil
+import traceback
 from datetime import datetime, timedelta
 from typing import List
 import mimetypes
 from pathlib import Path
 from dotenv import load_dotenv
 
-from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Header
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Header, Request
+from fastapi.responses import FileResponse, JSONResponse
 
 load_dotenv(dotenv_path=Path(__file__).parent / ".env")
 from fastapi.middleware.cors import CORSMiddleware
@@ -66,6 +67,22 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# ================= GLOBAL ERROR HANDLER =================
+# Ensure unexpected exceptions (5xx) also return CORS headers and a JSON body
+# instead of the raw ASGI "Internal Server Error" (which the browser
+# misinterprets as a CORS failure).
+@app.middleware("http")
+async def catch_errors_and_add_cors(request: Request, call_next):
+    try:
+        return await call_next(request)
+    except Exception:
+        traceback.print_exc()
+        return JSONResponse(
+            status_code=500,
+            content={"detail": "Internal server error"},
+        )
 
 # ================= CONFIG =================
 UPLOAD_DIR = "./uploads"
