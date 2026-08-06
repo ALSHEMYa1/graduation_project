@@ -1,10 +1,7 @@
 import os
-import requests
 import tempfile
 from pypdf import PdfReader
 from docx import Document as DocxDocument
-
-AI_SERVICE_URL = os.getenv("AI_SERVICE_URL", "http://127.0.0.1:5000")
 
 try:
     import pytesseract
@@ -91,16 +88,11 @@ def extract_text_from_pdf(pdf_path: str) -> str:
             print(f"[EXTRACT] Tesseract OCR error: {e}")
 
     try:
-        print("No text found in PDF, attempting OCR via AI service...")
-        res = requests.post(
-            f"{AI_SERVICE_URL}/ocr-pdf",
-            json={"pdf_path": os.path.abspath(pdf_path)},
-            timeout=1800
-        )
-        if res.ok:
-            result = res.json()
-            text = result.get("text", "")
-            print(f"OCR extracted {len(text)} chars")
+        from services.ai_engine import ocr_pdf
+        print("No text found in PDF, attempting OCR via AI engine...")
+        text = ocr_pdf(os.path.abspath(pdf_path))
+        if text.strip():
+            print(f"[EXTRACT] AI OCR extracted {len(text)} chars")
             if len(text) > MAX_TEXT_CHARS:
                 text = text[:MAX_TEXT_CHARS] + "\n\n[نص مقصوص - الملف كبير جداً]"
             return text
@@ -110,18 +102,11 @@ def extract_text_from_pdf(pdf_path: str) -> str:
         return ""
 
 def extract_text_from_image(image_path: str) -> str:
-    abs_path = os.path.abspath(image_path)
     try:
-        res = requests.post(
-            f"{AI_SERVICE_URL}/extract-text-from-image",
-            json={"image_path": abs_path},
-            timeout=60
-        )
-        if res.ok:
-            return res.json().get("text", "")
-        return ""
+        from services.ai_engine import extract_text_from_image as ai_extract_text_from_image
+        return ai_extract_text_from_image(os.path.abspath(image_path))
     except Exception as e:
-        print(f"Error extracting text from image via AI: {e}")
+        print(f"Error extracting text from image via AI engine: {e}")
         return ""
 
 def extract_text_from_txt(txt_path: str) -> str:

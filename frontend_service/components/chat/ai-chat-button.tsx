@@ -93,8 +93,8 @@ export function AiChatButton() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className={cn(
-          'fixed bottom-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center',
-          isRtl ? 'left-6' : 'right-6'
+          'fixed bottom-5 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center',
+          isRtl ? 'left-5' : 'right-5'
         )}
       >
         <MessageSquare className="w-6 h-6" />
@@ -116,8 +116,8 @@ export function AiChatButton() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className={cn(
-                'fixed bottom-24 z-50 w-[360px] h-[480px] flex flex-col rounded-2xl border bg-card overflow-hidden',
-                isRtl ? 'left-6' : 'right-6'
+                'fixed bottom-24 z-50 w-[min(360px,calc(100vw-3rem))] h-[min(480px,60dvh)] flex flex-col rounded-2xl border bg-card overflow-hidden',
+                isRtl ? 'left-3' : 'right-3'
               )}
               dir={dir}
             >

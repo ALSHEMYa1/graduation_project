@@ -1,21 +1,87 @@
-import os
-import requests
+import traceback
+
 from fastapi import HTTPException
 
-AI_URL = os.getenv("AI_SERVICE_URL", "http://127.0.0.1:5000")
+from services.ai_engine import (
+    summarize_text,
+    generate_test,
+    generate_flashcards,
+    generate_study_plan,
+    generate_mind_map,
+    chat_with_ai,
+    analyze_knowledge_gaps,
+)
+
 
 def call_ai(endpoint: str, data: dict):
+    """Call the AI engine directly (no separate AI service).
+
+    Preserves the exact response shapes the AI service previously exposed
+    so existing backend routes and the frontend keep working unchanged.
+    """
     try:
-        response = requests.post(f"{AI_URL}/{endpoint}", json=data, timeout=1800)
-        if not response.ok:
-            detail = response.text[:500] if response.text else f"AI service returned {response.status_code}"
-            raise HTTPException(status_code=502, detail=f"AI service error: {detail}")
-        return response.json()
-    except requests.ConnectionError:
-        raise HTTPException(status_code=502, detail="AI service is not available. Make sure the AI service is running on port 5000.")
-    except requests.Timeout:
-        raise HTTPException(status_code=504, detail="AI service timed out. The request took too long.")
+        if endpoint == "summarize":
+            result = summarize_text(
+                data.get("text", ""),
+                data.get("language", "ar"),
+                data.get("detail_level", "short"),
+            )
+            return {"summary": result}
+
+        if endpoint == "generate-comprehensive-test":
+            return generate_test(
+                data.get("text", ""),
+                data.get("language", "ar"),
+                data.get("subject_title", "Study Material"),
+                int(data.get("num_questions", 5)),
+            )
+
+        if endpoint == "generate-flashcards":
+            return generate_flashcards(
+                data.get("text", ""),
+                data.get("language", "ar"),
+                data.get("subject_title", "Study Material"),
+                int(data.get("num_cards", 20)),
+            )
+
+        if endpoint == "generate-study-plan":
+            result = generate_study_plan(
+                data.get("text", ""),
+                int(data.get("days", 7)),
+                data.get("language", "ar"),
+                data.get("subject_title", "Study Material"),
+            )
+            return {
+                "plan": result.get("days", []),
+                "meta": result.get("plan_metadata", {}),
+            }
+
+        if endpoint == "generate-mind-map":
+            return generate_mind_map(
+                data.get("text", ""),
+                data.get("language", "ar"),
+                data.get("subject_title", "Study Material"),
+            )
+
+        if endpoint == "chat":
+            response = chat_with_ai(
+                data.get("user_message", ""),
+                data.get("conversation_history", []),
+                data.get("document_text", ""),
+                data.get("language", "en"),
+            )
+            return {"response": response}
+
+        if endpoint == "analyze-knowledge-gaps":
+            return analyze_knowledge_gaps(
+                data.get("text", ""),
+                data.get("language", "en"),
+                data.get("subject_title", "Study Material"),
+            )
+
+        raise HTTPException(status_code=404, detail=f"Unknown AI endpoint: {endpoint}")
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Unexpected error communicating with AI service: {str(e)}")
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"AI engine error: {str(e)}")

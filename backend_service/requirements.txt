@@ -2,6 +2,7 @@ fastapi
 uvicorn
 openai
 dotenv
+python-dotenv
 pypdf
 Pillow
 pytesseract

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { ChevronLeft, ChevronRight, Moon, Sun, Bell } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Moon, Sun, Bell, Menu } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { useI18n } from '@/components/providers/i18n-provider'
@@ -12,14 +12,16 @@ import { LanguageSwitcher } from '@/components/layout/language-switcher'
 interface AppHeaderProps {
   title?: string
   showBack?: boolean
+  onMenuToggle?: () => void
 }
 
-export function AppHeader({ title, showBack = true }: AppHeaderProps) {
+export function AppHeader({ title, showBack = true, onMenuToggle }: AppHeaderProps) {
   const router = useRouter()
   const pathname = usePathname()
   const { t, dir } = useI18n()
   const { theme, setTheme } = useTheme()
   const isRtl = dir === 'rtl'
+  const canGoBack = showBack && pathname.split('/').filter(Boolean).length > 0
 
   const segments = pathname.split('/').filter(Boolean)
   const breadcrumbs = segments.map((seg, i) => ({
@@ -30,8 +32,19 @@ export function AppHeader({ title, showBack = true }: AppHeaderProps) {
   const BackIcon = isRtl ? ChevronRight : ChevronLeft
 
   return (
-    <header className="sticky top-0 z-30 h-14 flex items-center gap-3 px-4 border-b border-border bg-background/80 backdrop-blur-md">
-      {showBack && segments.length > 0 && (
+    <header className="sticky top-0 z-30 h-14 flex items-center gap-2 px-3 border-b border-border bg-background/80 backdrop-blur-md lg:px-4">
+      {/* Mobile menu toggle */}
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={onMenuToggle}
+        className="shrink-0 w-9 h-9 lg:hidden"
+        aria-label="Open menu"
+      >
+        <Menu className="w-5 h-5" />
+      </Button>
+
+      {canGoBack && (
         <Button
           variant="ghost"
           size="icon"
@@ -44,7 +57,7 @@ export function AppHeader({ title, showBack = true }: AppHeaderProps) {
       )}
 
       {/* Breadcrumbs */}
-      <nav aria-label="breadcrumb" className="flex items-center gap-1 flex-1 min-w-0">
+      <nav aria-label="breadcrumb" className="hidden md:flex items-center gap-1 flex-1 min-w-0">
         <Link href="/dashboard" className="text-muted-foreground hover:text-foreground text-sm transition-colors shrink-0">
           {t('dashboard')}
         </Link>

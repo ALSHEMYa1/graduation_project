@@ -22,3 +22,6 @@ ios/
 
 # Next.js static export
 out/
+
+# Next.js build artifact
+*.tsbuildinfo
