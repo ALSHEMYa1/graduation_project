@@ -3,8 +3,8 @@ export type Language = 'en' | 'ar'
 export const translations = {
   en: {
     // Brand
-    brand: '𝓐𝓢𝓐',
-    tagline: '𝗔𝗜 𝗦𝘁𝘂𝗱𝘆 𝗔𝘀𝘀𝗶𝘀𝘁𝗮𝗻𝘁',
+    brand: 'ASA',
+    tagline: 'AI Study Assistant',
     // Nav
     dashboard: 'Dashboard',
     upload: 'Upload',
@@ -33,7 +33,8 @@ export const translations = {
     checkEmail: 'Check your email for reset instructions',
     continueWith: 'Or continue with',
     // Landing
-    heroTitle: 'Study Smarter with AI',
+    heroTitleA: 'Study Smarter with',
+    heroTitleB: 'AI',
     heroSubtitle: 'Upload your study materials and let AI generate summaries, quizzes, and personalized study plans in seconds.',
     getStarted: 'Get Started Free',
     learnMore: 'Learn More',
@@ -46,6 +47,16 @@ export const translations = {
     feature3Desc: 'Personalized weekly study schedules tailored to your goals.',
     feature4Title: 'AI Chat',
     feature4Desc: 'Ask questions about your documents and get instant answers.',
+    badge: 'Powered by AI',
+    navFeatures: 'Features',
+    navHow: 'How it works',
+    howTitle: 'How it works',
+    step1Title: 'Upload your materials',
+    step1Desc: 'Upload PDFs or paste text directly into the app.',
+    step2Title: 'AI does the work',
+    step2Desc: 'Summaries, quizzes, flashcards and study plans in seconds.',
+    step3Title: 'Study & track progress',
+    step3Desc: 'Follow your scores and weekly activity with ease.',
     // Dashboard
     filesUploaded: 'Files Uploaded',
     quizzesTaken: 'Quizzes Taken',
@@ -273,8 +284,8 @@ export const translations = {
   },
   ar: {
     // Brand
-    brand: '𝓐𝓢𝓐',
-    tagline: 'مساعد الدراسة بالذكاء الاصطناعي',
+    brand: 'ASA',
+    tagline: 'مساعد الدراسة الذكي',
     // Nav
     dashboard: 'لوحة التحكم',
     upload: 'رفع الملفات',
@@ -303,7 +314,8 @@ export const translations = {
     checkEmail: 'تحقق من بريدك الإلكتروني للتعليمات',
     continueWith: 'أو تابع باستخدام',
     // Landing
-    heroTitle: 'ادرس بذكاء مع الذكاء الاصطناعي',
+    heroTitleA: 'ادرس بذكاء مع',
+    heroTitleB: 'الذكاء الاصطناعي',
     heroSubtitle: 'ارفع مواد دراستك ودع الذكاء الاصطناعي يولّد الملخصات والاختبارات وخطط الدراسة في ثوانٍ.',
     getStarted: 'ابدأ مجاناً',
     learnMore: 'اعرف أكثر',
@@ -316,6 +328,16 @@ export const translations = {
     feature3Desc: 'جداول دراسية أسبوعية مخصصة وفقاً لأهدافك.',
     feature4Title: 'محادثة ذكية',
     feature4Desc: 'اطرح أسئلة حول مستنداتك واحصل على إجابات فورية.',
+    badge: 'مدعوم بالذكاء الاصطناعي',
+    navFeatures: 'المميزات',
+    navHow: 'إزاي يشتغل',
+    howTitle: 'إزاي يشتغل؟',
+    step1Title: 'ارفع المواد',
+    step1Desc: 'ارفع ملفات PDF أو الصق نصاً مباشرة في التطبيق.',
+    step2Title: 'الذكاء الاصطناعي يشغّل كل حاجة',
+    step2Desc: 'ملخصات واختبارات وبطاقات وخطط دراسة في ثوانٍ.',
+    step3Title: 'ذاكر وتابع تقدمك',
+    step3Desc: 'تابع درجاتك ونشاطك الأسبوعي بسهولة.',
     // Dashboard
     filesUploaded: 'الملفات المرفوعة',
     quizzesTaken: 'الاختبارات المنجزة',
