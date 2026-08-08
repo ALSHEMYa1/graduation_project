@@ -57,6 +57,16 @@ export const translations = {
     step2Desc: 'Summaries, quizzes, flashcards and study plans in seconds.',
     step3Title: 'Study & track progress',
     step3Desc: 'Follow your scores and weekly activity with ease.',
+    // Shared UI
+    confirmAnswer: 'Confirm Answer',
+    seeResults: 'See Results',
+    explanation: 'Explanation',
+    selectDocFirst: 'Please select a document first',
+    notEnoughQuestions: 'Not enough questions generated, try again',
+    somethingWentWrong: 'Something went wrong',
+    loadingProfile: 'Loading profile…',
+    manageAccount: 'Manage your account settings',
+    bio: 'Bio',
     // Dashboard
     filesUploaded: 'Files Uploaded',
     quizzesTaken: 'Quizzes Taken',
@@ -338,6 +348,16 @@ export const translations = {
     step2Desc: 'ملخصات واختبارات وبطاقات وخطط دراسة في ثوانٍ.',
     step3Title: 'ذاكر وتابع تقدمك',
     step3Desc: 'تابع درجاتك ونشاطك الأسبوعي بسهولة.',
+    // Shared UI
+    confirmAnswer: 'تأكيد الإجابة',
+    seeResults: 'عرض النتائج',
+    explanation: 'التفسير',
+    selectDocFirst: 'اختر ملفاً أولاً',
+    notEnoughQuestions: 'لم يتم توليد أسئلة كافية، حاول مرة أخرى',
+    somethingWentWrong: 'حدث خطأ ما',
+    loadingProfile: 'جاري تحميل الملف…',
+    manageAccount: 'إدارة إعدادات حسابك',
+    bio: 'نبذة',
     // Dashboard
     filesUploaded: 'الملفات المرفوعة',
     quizzesTaken: 'الاختبارات المنجزة',

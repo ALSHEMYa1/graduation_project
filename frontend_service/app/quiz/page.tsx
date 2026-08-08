@@ -59,7 +59,7 @@ export default function QuizPage() {
 
       const rawQuestions = data.questions || []
       if (!Array.isArray(rawQuestions) || rawQuestions.length === 0) {
-        throw new Error("لم يتم إنشاء أسئلة كافية، حاول مرة أخرى")
+        throw new Error(t('notEnoughQuestions'))
       }
 
       const shuffled = rawQuestions.map((q: Question) => ({
@@ -76,7 +76,7 @@ export default function QuizPage() {
       setResults([])
 
     } catch (err: any) {
-      setError(err.message || "Something went wrong")
+      setError(err.message || t('somethingWentWrong'))
       setState("error")
     }
   }
@@ -171,7 +171,7 @@ export default function QuizPage() {
                   {t('question')} {currentQ + 1} {t('of')} {questions.length}
                 </p>
                 <Button variant="ghost" size="sm" onClick={startQuiz}>
-                  <RefreshCw className="w-4 h-4 mr-1" /> Regenerate
+                  <RefreshCw className="w-4 h-4 mr-1" /> {t('regenerate')}
                 </Button>
               </div>
 
@@ -213,14 +213,14 @@ export default function QuizPage() {
                     disabled={selected === null}
                     className="gap-2 grad-brand text-white glow-btn hover:opacity-90"
                   >
-                    <Check className="w-4 h-4" /> Confirm Answer
+                    <Check className="w-4 h-4" /> {t('confirmAnswer')}
                   </Button>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {questions[currentQ]?.explanation && (
                     <div className="p-4 bg-muted rounded-xl text-sm">
-                      <p className="font-medium mb-1">Explanation:</p>
+                      <p className="font-medium mb-1">{t('explanation')}:</p>
                       <p className="text-muted-foreground">{questions[currentQ]?.explanation}</p>
                     </div>
                   )}

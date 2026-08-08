@@ -68,10 +68,10 @@ function layoutTree(node: TreeNode, levelY: number[]): void {
 }
 
 const levelStyles = [
-  { bg: 'bg-gradient-to-br from-blue-500 to-blue-600', border: 'border-blue-400', shadow: 'shadow-blue-500/20' },
-  { bg: 'bg-gradient-to-br from-emerald-500 to-emerald-600', border: 'border-emerald-400', shadow: 'shadow-emerald-500/20' },
-  { bg: 'bg-gradient-to-br from-amber-500 to-amber-600', border: 'border-amber-400', shadow: 'shadow-amber-500/20' },
-  { bg: 'bg-gradient-to-br from-violet-500 to-violet-600', border: 'border-violet-400', shadow: 'shadow-violet-500/20' },
+  { bg: 'bg-indigo-600', border: 'border-indigo-500', shadow: 'shadow-indigo-500/20', text: 'text-white' },
+  { bg: 'bg-indigo-500', border: 'border-indigo-400', shadow: 'shadow-indigo-500/15', text: 'text-white' },
+  { bg: 'bg-indigo-100', border: 'border-indigo-200', shadow: 'shadow-indigo-500/10', text: 'text-indigo-900' },
+  { bg: 'bg-indigo-50', border: 'border-indigo-100', shadow: 'shadow-indigo-500/10', text: 'text-indigo-900' },
 ]
 
 export default function MindMapView({ data }: { data: MindMapData }) {
@@ -111,7 +111,7 @@ export default function MindMapView({ data }: { data: MindMapData }) {
               key={`e-${node.id}-${child.id}`}
               d={`M${x1},${y1} C${x1},${cy} ${x2},${cy} ${x2},${y2}`}
               fill="none"
-              stroke={sel ? s.bg.replace('bg-gradient-to-br from-', '#')?.split(' ')[0] || '#94a3b8' : '#94a3b8'}
+              stroke={sel ? '#6366f1' : '#94a3b8'}
               strokeWidth={sel ? 2.5 : 1.5}
               strokeOpacity={0.5}
               className="transition-all duration-300"
@@ -123,8 +123,8 @@ export default function MindMapView({ data }: { data: MindMapData }) {
             onClick={() => setSelectedNode(sel ? null : node)}
             className={cn(
               'h-full rounded-xl flex items-center justify-center px-3 text-xs font-semibold cursor-pointer transition-all duration-200 border-2 shadow-md hover:shadow-lg',
-              s.bg, s.text || 'text-white', s.border,
-              sel && 'ring-2 ring-offset-2 ring-offset-background ring-blue-400 scale-[1.03]',
+              s.bg, s.text, s.border,
+              sel && 'ring-2 ring-offset-2 ring-offset-background ring-indigo-400 scale-[1.03]',
               node.level === 0 ? 'text-sm' : ''
             )}
             style={{ width: NODE_W, height: node.level === 0 ? 44 : 36 }}
@@ -166,7 +166,7 @@ export default function MindMapView({ data }: { data: MindMapData }) {
       </div>
 
       {selectedNode && (
-        <div className="p-4 border rounded-2xl bg-gradient-to-br from-muted/80 to-muted shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="p-4 border rounded-2xl bg-card shadow-sm">
           <div className="flex items-center gap-2 mb-1.5">
             <Info className="w-4 h-4 text-primary" />
             <p className="font-semibold text-sm">{selectedNode.label}</p>

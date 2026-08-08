@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Sparkles, ChevronDown, BookOpen, ListChecks, Target, Clock, RefreshCw, Loader2 } from 'lucide-react'
+import { Sparkles, ChevronDown, BookOpen, ListChecks, Target, Clock, RefreshCw, Loader2, Check, X } from 'lucide-react'
 import { AppShell } from '@/components/layout/app-shell'
 import { useI18n } from '@/components/providers/i18n-provider'
 import { apiPost } from '@/lib/api'
@@ -363,7 +363,10 @@ export default function StudyPlanPage() {
                                               'mt-2 text-xs p-2 rounded',
                                               isCorrect ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
                                             )}>
-                                              {isCorrect ? '✅ Correct!' : `❌ Incorrect. Answer: ${q.correct_answer}`}
+                                              <span className="inline-flex items-center gap-1 font-semibold">
+                                                {isCorrect ? <Check className="w-3.5 h-3.5" /> : <X className="w-3.5 h-3.5" />}
+                                                {isCorrect ? t('correct') : `${t('incorrect')}: ${q.correct_answer}`}
+                                              </span>
                                               {q.explanation && <p className="mt-1 text-muted-foreground">{q.explanation}</p>}
                                             </div>
                                           )}

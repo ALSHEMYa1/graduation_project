@@ -85,7 +85,7 @@ export default function ProfilePage() {
     return (
       <AppShell title={t('profile')}>
         <div className="p-6 text-center text-muted-foreground">
-          Loading profile...
+          {t('loadingProfile')}
         </div>
       </AppShell>
     )
@@ -97,7 +97,7 @@ export default function ProfilePage() {
         <div>
           <h1 className="text-2xl font-bold">{t('profileTitle')}</h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Manage your account settings
+            {t('manageAccount')}
           </p>
         </div>
 
@@ -169,7 +169,7 @@ export default function ProfilePage() {
               </div>
 
               <div className="space-y-1.5">
-                <Label>Bio</Label>
+                <Label>{t('bio')}</Label>
                 <textarea
                   value={form.bio}
                   onChange={(e) =>

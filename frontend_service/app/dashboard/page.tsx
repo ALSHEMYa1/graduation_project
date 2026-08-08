@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
 import {
   Upload,
   Brain,
@@ -21,15 +20,6 @@ import { cn } from '@/lib/utils'
 const GOAL_HOURS = 20
 
 const weeklyHours = [2, 3, 1, 4, 2, 5, 3]
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.07, duration: 0.35 },
-  }),
-}
 
 export default function DashboardPage() {
   const { t, lang } = useI18n()
@@ -116,56 +106,44 @@ export default function DashboardPage() {
       icon: Upload,
       title: t('uploadFile'),
       desc: t('uploadDesc'),
-      gradient: 'bg-gradient-to-br from-violet-500 to-indigo-600',
-      shadow: 'shadow-violet-500/25',
-      bar: 'w-1/3 group-hover:w-2/3',
     },
     {
       href: '/quiz',
       icon: Brain,
       title: t('generateQuiz'),
       desc: t('quizDesc'),
-      gradient: 'bg-gradient-to-br from-sky-500 to-cyan-500',
-      shadow: 'shadow-sky-500/25',
-      bar: 'w-1/2 group-hover:w-3/4',
     },
     {
       href: '/study-plan',
       icon: CalendarDays,
       title: t('createPlan'),
       desc: t('planDesc'),
-      gradient: 'bg-gradient-to-br from-emerald-500 to-teal-600',
-      shadow: 'shadow-emerald-500/25',
-      bar: 'w-2/3 group-hover:w-full',
     },
     {
       href: '/chat',
       icon: MessageSquare,
       title: t('startChat'),
       desc: t('chatDesc'),
-      gradient: 'bg-gradient-to-br from-amber-500 to-orange-600',
-      shadow: 'shadow-amber-500/25',
-      bar: 'w-1/4 group-hover:w-1/2',
     },
   ]
 
   return (
     <AppShell title={t('dashboard')}>
-      <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-6">
+      <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-6 animate-fadeUp">
         {/* Hero */}
         <section className="relative overflow-hidden rounded-3xl grad-brand text-white p-6 sm:p-8 card-hover">
           <div className="absolute inset-0 bg-grid opacity-40" />
           <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-5">
             <div>
-              <p className="text-sm text-white/80">{t('hello')} 👋</p>
+              <p className="text-sm text-white/80">{t('hello')}</p>
               <h1 className="text-2xl sm:text-3xl font-black mt-1">{t('heroCta')}</h1>
               <p className="text-white/80 mt-2 text-sm sm:text-base max-w-md">{t('heroSub')}</p>
               <div className="flex flex-wrap gap-3 mt-5">
-                <Link href="/upload" className="px-5 py-2.5 rounded-xl bg-white text-indigo-600 font-bold glow-btn">
-                  📄 {t('uploadNew')}
+                <Link href="/upload" className="px-5 py-2.5 rounded-xl bg-white text-indigo-600 font-bold glow-btn inline-flex items-center gap-2">
+                  <Upload className="w-4 h-4" /> {t('uploadNew')}
                 </Link>
-                <Link href="/quiz" className="px-5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 transition font-bold">
-                  ⚡ {t('makeQuiz')}
+                <Link href="/quiz" className="px-5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 transition inline-flex items-center gap-2 font-bold">
+                  <Brain className="w-4 h-4" /> {t('makeQuiz')}
                 </Link>
               </div>
             </div>
@@ -198,12 +176,8 @@ export default function DashboardPage() {
         {/* Stats */}
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map(({ label, value, trend, icon: Icon, chip }, i) => (
-            <motion.div
+            <div
               key={label}
-              custom={i}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
               className="card-hover p-5 rounded-2xl bg-card border border-border shadow-sm"
             >
               <div className="flex items-center justify-between">
@@ -214,17 +188,13 @@ export default function DashboardPage() {
               </div>
               <p className="text-sm text-muted-foreground mt-1">{label}</p>
               <span className="text-[11px] font-bold text-emerald-500 mt-1 inline-block">{trend}</span>
-            </motion.div>
+            </div>
           ))}
         </section>
 
         {/* Chart + Recent */}
         <section className="grid lg:grid-cols-3 gap-4">
-          <motion.div
-            custom={4}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
+          <div
             className="lg:col-span-2 card-hover p-5 rounded-2xl bg-card border border-border shadow-sm"
           >
             <div className="flex items-center justify-between mb-4">
@@ -259,24 +229,18 @@ export default function DashboardPage() {
                 {t('studyHours')}
               </span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            custom={5}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="card-hover p-5 rounded-2xl bg-card border border-border shadow-sm"
-          >
+          <div className="card-hover p-5 rounded-2xl bg-card border border-border shadow-sm">
             <h3 className="font-extrabold mb-4">{t('recentActivity')}</h3>
             <div className="flex flex-col items-center justify-center h-48 text-center">
-              <div className="w-12 h-12 rounded-2xl bg-violet-100 dark:bg-violet-500/20 text-violet-500 flex items-center justify-center mb-3">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-500 dark:bg-indigo-500/10 dark:text-indigo-300 flex items-center justify-center mb-3">
                 <Clock className="w-6 h-6" />
               </div>
               <p className="text-sm font-semibold">{t('noActivity')}</p>
               <p className="text-xs text-muted-foreground mt-1">{t('noActivityDesc')}</p>
             </div>
-          </motion.div>
+          </div>
         </section>
 
         {/* Quick tools */}
@@ -288,26 +252,18 @@ export default function DashboardPage() {
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {quickTools.map(({ href, icon: Icon, title, desc, gradient, shadow, bar }, i) => (
-              <motion.div key={href} custom={i} variants={fadeUp} initial="hidden" animate="visible">
-                <Link
-                  href={href}
-                  className={cn(
-                    'card-hover group rounded-2xl text-white p-5 shadow-lg block',
-                    gradient,
-                    shadow
-                  )}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-extrabold">{title}</span>
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <p className="text-white/70 text-xs mt-1">{desc}</p>
-                  <div className="mt-4 h-1.5 rounded-full bg-white/25 overflow-hidden">
-                    <div className={cn('h-full rounded-full bg-white transition-all duration-500', bar)} />
-                  </div>
-                </Link>
-              </motion.div>
+            {quickTools.map(({ href, icon: Icon, title, desc }) => (
+              <Link
+                key={href}
+                href={href}
+                className="card-hover group rounded-2xl border border-border bg-card p-5 block"
+              >
+                <div className="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-extrabold">{title}</span>
+                <p className="text-muted-foreground text-xs mt-1">{desc}</p>
+              </Link>
             ))}
           </div>
         </section>

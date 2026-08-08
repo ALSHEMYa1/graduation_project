@@ -333,14 +333,14 @@ export default function GapAnalysisPage() {
             <div className="flex justify-between">
               {!confirmed ? (
                 <Button onClick={confirmAnswer} disabled={!selectedOption} className="ml-auto grad-brand text-white glow-btn hover:opacity-90">
-                  Confirm Answer
+                  {t('confirmAnswer')}
                 </Button>
               ) : (
                 <Button onClick={nextQuestion} className="ml-auto grad-brand text-white glow-btn hover:opacity-90">
                   {currentQ < questions.length - 1 ? (
                     <>{t('nextQuestion')} {isRtl ? <ArrowLeft className="w-4 h-4 mr-1" /> : <ArrowRight className="w-4 h-4 ml-1" />}</>
                   ) : (
-                    'See Results'
+                    t('seeResults')
                   )}
                 </Button>
               )}

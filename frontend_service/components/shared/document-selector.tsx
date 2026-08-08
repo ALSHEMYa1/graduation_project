@@ -24,7 +24,7 @@ export function DocumentSelector({ selectedId, onSelect }: DocumentSelectorProps
   const [open, setOpen] = useState(false)
   const [documents, setDocuments] = useState<Document[]>([])
 
-  // 🔥 Fetch real files from backend
+  // Fetch real files from backend
   useEffect(() => {
     const fetchDocs = async () => {
       try {
