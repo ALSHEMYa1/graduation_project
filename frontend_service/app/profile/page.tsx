@@ -108,8 +108,8 @@ export default function ProfilePage() {
         >
           <div className="flex items-center gap-5">
             <div className="relative group">
-              <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center border-2 border-border">
-                <User className="w-10 h-10 text-primary" />
+              <div className="w-20 h-20 rounded-2xl grad-brand text-white flex items-center justify-center shadow-md shadow-indigo-500/30">
+                <User className="w-10 h-10" />
               </div>
               <button className="absolute inset-0 rounded-2xl bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <Camera className="w-5 h-5 text-white" />
@@ -130,7 +130,7 @@ export default function ProfilePage() {
                 <Button variant="ghost" size="sm" onClick={() => setEditing(false)}>
                   {t('cancel')}
                 </Button>
-                <Button size="sm" onClick={handleSave}>
+                <Button size="sm" onClick={handleSave} className="grad-brand text-white glow-btn hover:opacity-90">
                   {saved ? <Check className="w-4 h-4" /> : null}
                   {t('saveChanges')}
                 </Button>

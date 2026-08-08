@@ -24,7 +24,7 @@ export function AppShell({ children, title }: AppShellProps) {
   }, [pathname])
 
   return (
-    <div className={`flex h-screen overflow-hidden bg-background ${isRtl ? 'flex-row-reverse' : 'flex-row'}`} dir="ltr">
+    <div className={`flex h-screen overflow-hidden app-bg ${isRtl ? 'flex-row-reverse' : 'flex-row'}`} dir="ltr">
       <AppSidebar
         collapsed={sidebarCollapsed}
         onToggle={() => setSidebarCollapsed((p) => !p)}

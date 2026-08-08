@@ -118,7 +118,7 @@ export default function FlashcardsPage() {
                     className="w-20 text-center border rounded-lg p-2 text-sm"
                   />
                 </div>
-                <Button onClick={generateCards} className="gap-2">
+                <Button onClick={generateCards} className="gap-2 grad-brand text-white glow-btn hover:opacity-90">
                   {t('generate')} <Brain className="w-4 h-4" />
                 </Button>
               </div>

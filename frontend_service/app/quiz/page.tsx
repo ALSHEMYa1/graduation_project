@@ -140,7 +140,7 @@ export default function QuizPage() {
                   />
                 </div>
 
-                <Button onClick={startQuiz} className="gap-2">
+                <Button onClick={startQuiz} className="gap-2 grad-brand text-white glow-btn hover:opacity-90">
                   {t('startQuiz')} <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
@@ -211,7 +211,7 @@ export default function QuizPage() {
                   <Button
                     onClick={handleConfirm}
                     disabled={selected === null}
-                    className="gap-2"
+                    className="gap-2 grad-brand text-white glow-btn hover:opacity-90"
                   >
                     <Check className="w-4 h-4" /> Confirm Answer
                   </Button>
@@ -225,7 +225,7 @@ export default function QuizPage() {
                     </div>
                   )}
                   <div className="flex justify-center">
-                    <Button onClick={handleNext} className="gap-2">
+                    <Button onClick={handleNext} className="gap-2 grad-brand text-white glow-btn hover:opacity-90">
                       {currentQ + 1 >= questions.length ? t('submitQuiz') : t('nextQuestion')}
                       <ArrowRight className="w-4 h-4" />
                     </Button>
@@ -242,7 +242,7 @@ export default function QuizPage() {
               <p className="text-lg text-muted-foreground">
                 {score} / {questions.length} {t('correct')}
               </p>
-              <Button onClick={() => setState('idle')} className="gap-2">
+              <Button onClick={() => setState('idle')} className="gap-2 grad-brand text-white glow-btn hover:opacity-90">
                 {t('tryAgain')} <RefreshCw className="w-4 h-4" />
               </Button>
             </div>

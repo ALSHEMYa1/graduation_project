@@ -34,10 +34,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.dir = dir
     if (l === 'ar') {
       document.documentElement.classList.add('arabic')
-      document.body.style.fontFamily = "var(--font-noto-arabic), var(--font-inter), sans-serif"
     } else {
       document.documentElement.classList.remove('arabic')
-      document.body.style.fontFamily = "var(--font-inter), sans-serif"
     }
   }
 

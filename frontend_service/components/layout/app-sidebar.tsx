@@ -49,16 +49,25 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
       .catch(() => {})
   }, [])
 
-  const navItems = [
-    { href: '/dashboard', icon: LayoutDashboard, label: t('dashboard') },
-    { href: '/upload', icon: Upload, label: t('upload') },
-    { href: '/summary', icon: FileText, label: t('summary') },
-    { href: '/quiz', icon: Brain, label: t('quiz') },
-    { href: '/flashcards', icon: Layers, label: t('flashcards') },
-    { href: '/gap-analysis', icon: Search, label: t('gapAnalysis') },
-    { href: '/study-plan', icon: CalendarDays, label: t('studyPlan') },
-    { href: '/chat', icon: MessageSquare, label: t('chat') },
-    { href: '/profile', icon: User, label: t('profile') },
+  const navGroups = [
+    {
+      label: t('navMain'),
+      items: [
+        { href: '/dashboard', icon: LayoutDashboard, label: t('dashboard') },
+        { href: '/upload', icon: Upload, label: t('upload') },
+        { href: '/summary', icon: FileText, label: t('summary') },
+        { href: '/quiz', icon: Brain, label: t('quiz') },
+        { href: '/flashcards', icon: Layers, label: t('flashcards') },
+      ],
+    },
+    {
+      label: t('navAi'),
+      items: [
+        { href: '/gap-analysis', icon: Search, label: t('gapAnalysis') },
+        { href: '/study-plan', icon: CalendarDays, label: t('studyPlan') },
+        { href: '/chat', icon: MessageSquare, label: t('chat') },
+      ],
+    },
   ]
 
   // RTL: sidebar on the right side, so collapse points right when open, left when closed
@@ -72,7 +81,7 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
       {/* Logo */}
       <div className="flex items-center h-14 px-4 shrink-0">
         <Link href="/dashboard" className="flex items-center gap-3 min-w-0" onClick={() => mobile && onMobileClose?.()}>
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-500 to-indigo-500 flex items-center justify-center shrink-0 shadow-sm">
+          <div className="w-8 h-8 rounded-lg grad-brand flex items-center justify-center shrink-0 shadow-md shadow-indigo-500/30">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 20L8 4L12 20" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M5.5 13.5L10.5 13.5" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
@@ -99,50 +108,59 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-2 py-2 space-y-1 overflow-y-auto">
-        {navItems.map(({ href, icon: Icon, label }) => {
-          const active = pathname === href || pathname.startsWith(href + '/')
-          const item = (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => mobile && onMobileClose?.()}
-              className={cn(
-                'flex items-center gap-3 px-2 py-2.5 rounded-lg transition-all duration-150 group',
-                collapsed && !mobile ? 'justify-center' : '',
-                active
-                  ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-sm'
-                  : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
-              )}
-            >
-              <Icon className="w-5 h-5 shrink-0" />
-              <AnimatePresence initial={false}>
-                {(!collapsed || mobile) && (
-                  <motion.span
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: 'auto' }}
-                    exit={{ opacity: 0, width: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-sm font-medium whitespace-nowrap overflow-hidden"
-                  >
-                    {label}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </Link>
-          )
-          if (collapsed && !mobile) {
-            return (
-              <Tooltip key={href}>
-                <TooltipTrigger asChild>{item}</TooltipTrigger>
-                <TooltipContent side={isRtl ? 'left' : 'right'}>
-                  {label}
-                </TooltipContent>
-              </Tooltip>
-            )
-          }
-          return item
-        })}
+      <nav className="flex-1 px-2 py-2 space-y-4 overflow-y-auto">
+        {navGroups.map((group) => (
+          <div key={group.label} className="space-y-1">
+            {(!collapsed || mobile) && (
+              <p className="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/70">
+                {group.label}
+              </p>
+            )}
+            {group.items.map(({ href, icon: Icon, label }) => {
+              const active = pathname === href || pathname.startsWith(href + '/')
+              const item = (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => mobile && onMobileClose?.()}
+                  className={cn(
+                    'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 group',
+                    collapsed && !mobile ? 'justify-center' : '',
+                    active
+                      ? 'grad-brand text-white font-semibold shadow-md shadow-indigo-500/25'
+                      : 'text-sidebar-foreground/85 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                  )}
+                >
+                  <Icon className="w-5 h-5 shrink-0" />
+                  <AnimatePresence initial={false}>
+                    {(!collapsed || mobile) && (
+                      <motion.span
+                        initial={{ opacity: 0, width: 0 }}
+                        animate={{ opacity: 1, width: 'auto' }}
+                        exit={{ opacity: 0, width: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-sm font-medium whitespace-nowrap overflow-hidden"
+                      >
+                        {label}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </Link>
+              )
+              if (collapsed && !mobile) {
+                return (
+                  <Tooltip key={href}>
+                    <TooltipTrigger asChild>{item}</TooltipTrigger>
+                    <TooltipContent side={isRtl ? 'left' : 'right'}>
+                      {label}
+                    </TooltipContent>
+                  </Tooltip>
+                )
+              }
+              return item
+            })}
+          </div>
+        ))}
       </nav>
 
       {/* Bottom */}
@@ -154,7 +172,7 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
                 href="/admin"
                 onClick={() => mobile && onMobileClose?.()}
                 className={cn(
-                  'flex items-center gap-3 px-2 py-2.5 rounded-lg text-muted-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent transition-all duration-150',
+                  'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sidebar-foreground/85 hover:text-sidebar-foreground hover:bg-sidebar-accent transition-all duration-150',
                   collapsed && !mobile ? 'justify-center' : ''
                 )}
               >
@@ -184,10 +202,42 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
         <Tooltip>
           <TooltipTrigger asChild>
             <Link
+              href="/profile"
+              onClick={() => mobile && onMobileClose?.()}
+              className={cn(
+                'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sidebar-foreground/85 hover:text-sidebar-foreground hover:bg-sidebar-accent transition-all duration-150',
+                collapsed && !mobile ? 'justify-center' : ''
+              )}
+            >
+              <User className="w-5 h-5 shrink-0" />
+              <AnimatePresence initial={false}>
+                {(!collapsed || mobile) && (
+                  <motion.span
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: 'auto' }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-sm font-medium whitespace-nowrap overflow-hidden"
+                  >
+                    {t('profile')}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </Link>
+          </TooltipTrigger>
+          {collapsed && !mobile && (
+            <TooltipContent side={isRtl ? 'left' : 'right'}>
+              {t('profile')}
+            </TooltipContent>
+          )}
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
               href="/"
               onClick={() => mobile && onMobileClose?.()}
               className={cn(
-                'flex items-center gap-3 px-2 py-2.5 rounded-lg text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all duration-150',
+                'flex items-center gap-3 px-3 py-2.5 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all duration-150',
                 collapsed && !mobile ? 'justify-center' : ''
               )}
             >
@@ -225,7 +275,7 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
           animate={{ width: collapsed ? 64 : 220 }}
           transition={{ duration: 0.25, ease: 'easeInOut' }}
           className={cn(
-            'relative hidden lg:flex flex-col h-full border-sidebar-border bg-sidebar overflow-hidden shrink-0',
+            'relative hidden lg:flex flex-col h-full border-sidebar-border bg-sidebar/80 glass overflow-hidden shrink-0',
             isRtl ? 'border-l' : 'border-r'
           )}
         >

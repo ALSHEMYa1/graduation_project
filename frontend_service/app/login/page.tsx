@@ -88,10 +88,10 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex bg-background" dir={dir}>
-      <div className="hidden lg:flex flex-1 items-center justify-center bg-muted/20 border-r border-border">
+    <div className="min-h-screen flex app-bg" dir={dir}>
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-muted/30 border-r border-border">
         <div className="text-center p-12">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-500 flex items-center justify-center mx-auto mb-6 shadow-lg">
+          <div className="w-20 h-20 rounded-2xl grad-brand flex items-center justify-center mx-auto mb-6 shadow-lg shadow-indigo-500/30">
             <svg viewBox="0 0 24 24" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 20L8 4L12 20" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M5.5 13.5L10.5 13.5" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
@@ -149,7 +149,7 @@ function LoginForm() {
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-2 top-2 text-muted-foreground"
+                  className="absolute end-2 top-2 text-muted-foreground"
                 >
                   {showPass ? <EyeOff /> : <Eye />}
                 </button>
@@ -162,8 +162,8 @@ function LoginForm() {
               </Link>
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Logging in...' : t('login')}
+            <Button type="submit" className="w-full grad-brand text-white glow-btn hover:opacity-90" disabled={loading}>
+              {loading ? t('loading') : t('login')}
             </Button>
           </form>
 

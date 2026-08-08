@@ -192,7 +192,9 @@ export default function GapAnalysisPage() {
 
             {files.length === 0 ? (
               <div className="p-12 border border-dashed rounded-2xl text-center">
-                <Brain className="w-10 h-10 mx-auto mb-3 text-muted-foreground" />
+                <div className="w-12 h-12 mx-auto mb-3 rounded-2xl grad-brand text-white flex items-center justify-center shadow-md shadow-indigo-500/30">
+                  <Brain className="w-6 h-6" />
+                </div>
                 <p className="font-medium">{t('selectDocumentFirst')}</p>
               </div>
             ) : (
@@ -244,7 +246,7 @@ export default function GapAnalysisPage() {
               </div>
             )}
 
-            <Button onClick={startAnalysis} disabled={!selectedFileId || loading} className="w-full">
+            <Button onClick={startAnalysis} disabled={!selectedFileId || loading} className="w-full grad-brand text-white glow-btn hover:opacity-90">
               {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Brain className="w-4 h-4 mr-2" />}
               {loading ? t('analyzing') : t('startAnalysis')}
             </Button>
@@ -330,11 +332,11 @@ export default function GapAnalysisPage() {
 
             <div className="flex justify-between">
               {!confirmed ? (
-                <Button onClick={confirmAnswer} disabled={!selectedOption} className="ml-auto">
+                <Button onClick={confirmAnswer} disabled={!selectedOption} className="ml-auto grad-brand text-white glow-btn hover:opacity-90">
                   Confirm Answer
                 </Button>
               ) : (
-                <Button onClick={nextQuestion} className="ml-auto">
+                <Button onClick={nextQuestion} className="ml-auto grad-brand text-white glow-btn hover:opacity-90">
                   {currentQ < questions.length - 1 ? (
                     <>{t('nextQuestion')} {isRtl ? <ArrowLeft className="w-4 h-4 mr-1" /> : <ArrowRight className="w-4 h-4 ml-1" />}</>
                   ) : (

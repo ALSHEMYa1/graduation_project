@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Mail } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -43,7 +43,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4" dir={dir}>
+    <div className="min-h-screen flex items-center justify-center app-bg px-4" dir={dir}>
       <div className="absolute top-4 right-4">
         <LanguageSwitcher />
       </div>
@@ -54,25 +54,25 @@ export default function ForgotPasswordPage() {
         className="w-full max-w-sm"
       >
         <Link href="/login" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground mb-8">
-          <ArrowLeft className="w-4 h-4" />
+          {dir === 'rtl' ? <ArrowRight className="w-4 h-4" /> : <ArrowLeft className="w-4 h-4" />}
           {t('back')}
         </Link>
 
         {!sent ? (
           <>
             <div className="mb-8">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-                <Mail className="w-6 h-6 text-primary" />
+              <div className="w-12 h-12 rounded-2xl grad-brand flex items-center justify-center mb-4 shadow-md shadow-indigo-500/30">
+                <Mail className="w-6 h-6 text-white" />
               </div>
               <h2 className="text-2xl font-bold">{t('forgotPassword')}</h2>
               <p className="text-muted-foreground text-sm mt-1">
-                Enter your email to receive a new password
+                {t('checkEmail')}
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <Label>Email</Label>
+                <Label>{t('email')}</Label>
                 <Input
                   type="email"
                   value={email}
@@ -80,8 +80,8 @@ export default function ForgotPasswordPage() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? 'Sending...' : t('sendResetLink')}
+              <Button type="submit" className="w-full grad-brand text-white glow-btn hover:opacity-90" disabled={loading}>
+                {loading ? t('loading') : t('sendResetLink')}
               </Button>
             </form>
           </>
@@ -91,16 +91,13 @@ export default function ForgotPasswordPage() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center"
           >
-            <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4">
-              <Mail className="w-8 h-8 text-green-500" />
+            <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-4">
+              <Mail className="w-8 h-8 text-emerald-500" />
             </div>
-            <h3 className="text-xl font-bold">Check your email</h3>
-            <p className="text-muted-foreground text-sm mb-6">
-              A new password has been sent to your email
-            </p>
+            <h3 className="text-xl font-bold">{t('checkEmail')}</h3>
             <Link href="/login">
-              <Button variant="outline" className="w-full">
-                Back to login
+              <Button variant="outline" className="w-full grad-brand text-white border-0 glow-btn hover:opacity-90 mt-6">
+                {t('login')}
               </Button>
             </Link>
           </motion.div>

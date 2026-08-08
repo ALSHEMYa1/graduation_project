@@ -93,11 +93,12 @@ export function AiChatButton() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className={cn(
-          'fixed bottom-5 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center',
+          'fixed bottom-5 z-50 w-14 h-14 rounded-2xl grad-brand text-white flex items-center justify-center shadow-xl shadow-indigo-500/40 glow-btn',
           isRtl ? 'left-5' : 'right-5'
         )}
       >
         <MessageSquare className="w-6 h-6" />
+        <span className="absolute -top-0.5 -end-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-background animate-pulse" />
       </motion.button>
 
       <AnimatePresence>
@@ -121,12 +122,17 @@ export function AiChatButton() {
               )}
               dir={dir}
             >
-              <div className="flex items-center justify-between px-4 py-3 border-b">
+              <div className="flex items-center justify-between px-4 py-3 border-b grad-brand text-white">
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-4 h-4" />
                   <p className="text-sm font-semibold">{t('chatTitle')}</p>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setOpen(false)}
+                  className="text-white hover:bg-white/15 hover:text-white rounded-xl"
+                >
                   <X className="w-4 h-4" />
                 </Button>
               </div>

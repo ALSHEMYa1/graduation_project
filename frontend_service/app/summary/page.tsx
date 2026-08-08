@@ -125,7 +125,7 @@ export default function SummaryPage() {
                 Copy
               </Button>
             )}
-            <Button onClick={regenerate} size="sm">
+            <Button onClick={regenerate} size="sm" className="grad-brand text-white glow-btn hover:opacity-90">
               <RefreshCw className="w-4 h-4" />
               Regenerate
             </Button>
@@ -137,7 +137,7 @@ export default function SummaryPage() {
           onSelect={(id: number) => setSelectedDocId(id)}
         />
 
-        <Button onClick={fetchSummary} disabled={!selectedDocId || loading}>
+        <Button onClick={fetchSummary} disabled={!selectedDocId || loading} className="grad-brand text-white glow-btn hover:opacity-90">
           {loading ? 'Generating...' : 'Generate Summary'}
         </Button>
 

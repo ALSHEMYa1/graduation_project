@@ -169,7 +169,7 @@ export default function StudyPlanPage() {
               placeholder="Days (1-30)"
               className="border p-2 rounded w-full"
             />
-            <Button onClick={handleGenerate} disabled={loading || !daysInput}>
+            <Button onClick={handleGenerate} disabled={loading || !daysInput} className="grad-brand text-white glow-btn hover:opacity-90">
               {loading ? 'Generating...' : 'Generate'}
             </Button>
           </div>

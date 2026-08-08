@@ -105,8 +105,8 @@ export default function ChatPage() {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-primary-foreground" />
+            <div className="w-9 h-9 rounded-full grad-brand flex items-center justify-center shadow-md shadow-indigo-500/30">
+              <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
               <p className="font-semibold text-sm">{t('chatTitle')}</p>
@@ -158,8 +158,8 @@ export default function ChatPage() {
 
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full text-center gap-3">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-                <MessageSquare className="w-8 h-8 text-primary" />
+              <div className="w-16 h-16 rounded-2xl grad-brand flex items-center justify-center shadow-md shadow-indigo-500/30">
+                <MessageSquare className="w-8 h-8 text-white" />
               </div>
               <p className="font-semibold text-lg">{t('noMessages')}</p>
               <p className="text-muted-foreground text-sm max-w-xs">
@@ -195,7 +195,7 @@ export default function ChatPage() {
                 <div className={cn(
                   'px-4 py-3 rounded-2xl text-sm leading-relaxed max-w-lg',
                   msg.role === 'user'
-                    ? 'bg-primary text-primary-foreground rounded-tr-sm'
+                    ? 'grad-brand text-white rounded-tr-sm'
                     : 'bg-card border border-border text-foreground rounded-tl-sm'
                 )}>
                   {msg.content}
@@ -214,8 +214,8 @@ export default function ChatPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex gap-3 max-w-3xl"
             >
-              <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-primary-foreground" />
+              <div className="w-8 h-8 rounded-full grad-brand flex items-center justify-center shadow-sm shadow-indigo-500/30">
+                <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div className="px-4 py-3 rounded-2xl bg-card border border-border">
                 <span className="text-xs text-muted-foreground">AI is typing...</span>

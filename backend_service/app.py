@@ -114,6 +114,42 @@ def hash_password(p):
     return pwd_context.hash(p)
 
 
+def bootstrap_admin():
+    """Create or promote an admin user from env vars (ADMIN_EMAIL / ADMIN_PASSWORD)."""
+    email = os.getenv("ADMIN_EMAIL", "").strip()
+    if not email:
+        return
+    db = SessionLocal()
+    try:
+        user = db.query(models.User).filter(models.User.email == email).first()
+        if user:
+            if not user.is_admin:
+                user.is_admin = True
+                print(f"[bootstrap] Promoted existing user to admin: {email}")
+        else:
+            password = os.getenv("ADMIN_PASSWORD", "")
+            if not password:
+                print("[bootstrap] ADMIN_PASSWORD not set; cannot create admin user")
+                return
+            user = models.User(
+                email=email,
+                name="Admin",
+                hashed_password=hash_password(password),
+                is_admin=True,
+            )
+            db.add(user)
+            print(f"[bootstrap] Created admin user: {email}")
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        print(f"[bootstrap] Failed to bootstrap admin: {e}")
+    finally:
+        db.close()
+
+
+bootstrap_admin()
+
+
 def create_token(data: dict):
     expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     data.update({"exp": expire})

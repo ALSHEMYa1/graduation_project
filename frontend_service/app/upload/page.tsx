@@ -186,7 +186,9 @@ export default function UploadPage() {
           )}
         >
           <input {...getInputProps()} />
-          <Upload className="w-10 h-10 mx-auto mb-3 text-muted-foreground" />
+          <div className="w-12 h-12 mx-auto mb-3 rounded-2xl grad-brand text-white flex items-center justify-center shadow-md shadow-indigo-500/30">
+            <Upload className="w-6 h-6" />
+          </div>
           <p className="font-medium">{isDragActive ? t('dropzoneActive') : t('dropzone')}</p>
           <p className="text-xs text-muted-foreground mt-1">PDF, DOC, DOCX up to 50MB</p>
         </div>
@@ -255,7 +257,7 @@ export default function UploadPage() {
             className="w-full resize-none"
           />
           <div className="flex justify-end">
-            <Button onClick={saveText} disabled={savingText || !textContent.trim()} className="gap-2">
+            <Button onClick={saveText} disabled={savingText || !textContent.trim()} className="gap-2 grad-brand text-white glow-btn hover:opacity-90">
               {savingText ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
               {t('saveText')}
             </Button>
