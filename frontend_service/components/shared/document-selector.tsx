@@ -5,6 +5,7 @@ import { FileText, ChevronDown, CheckCircle2, Upload } from 'lucide-react'
 import Link from 'next/link'
 import { useI18n } from '@/components/providers/i18n-provider'
 import { API_URL } from '@/lib/config'
+import { getToken } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 
 interface Document {
@@ -30,7 +31,7 @@ export function DocumentSelector({ selectedId, onSelect }: DocumentSelectorProps
       try {
         const res = await fetch(`${API_URL}/files`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+            Authorization: `Bearer ${getToken() || ''}`,
           },
         })
 

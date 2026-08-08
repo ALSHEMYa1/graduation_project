@@ -67,6 +67,7 @@ export const translations = {
     loadingProfile: 'Loading profile…',
     manageAccount: 'Manage your account settings',
     bio: 'Bio',
+    rememberMe: 'Remember me',
     // Dashboard
     filesUploaded: 'Files Uploaded',
     quizzesTaken: 'Quizzes Taken',
@@ -358,6 +359,7 @@ export const translations = {
     loadingProfile: 'جاري تحميل الملف…',
     manageAccount: 'إدارة إعدادات حسابك',
     bio: 'نبذة',
+    rememberMe: 'تذكرني',
     // Dashboard
     filesUploaded: 'الملفات المرفوعة',
     quizzesTaken: 'الاختبارات المنجزة',

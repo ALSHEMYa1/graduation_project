@@ -21,6 +21,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { API_URL } from '@/lib/config'
+import { getToken, clearSession } from '@/lib/auth'
 import { useI18n } from '@/components/providers/i18n-provider'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -39,7 +40,7 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
   const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = getToken()
     if (!token) return
     fetch(`${API_URL}/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -235,7 +236,10 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
           <TooltipTrigger asChild>
             <Link
               href="/"
-              onClick={() => mobile && onMobileClose?.()}
+              onClick={() => {
+                clearSession()
+                if (mobile) onMobileClose?.()
+              }}
               className={cn(
                 'flex items-center gap-3 px-3 py-2.5 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all duration-150',
                 collapsed && !mobile ? 'justify-center' : ''

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Cpu, FileText, Brain, MessageSquare, CalendarDays } from 'lucide-react'
 import { API_URL } from '@/lib/config'
+import { getToken } from '@/lib/auth'
 import { useI18n } from '@/components/providers/i18n-provider'
 
 interface AIUsageRecord {
@@ -22,7 +23,7 @@ export default function AdminAiUsagePage() {
   useEffect(() => {
     const fetchUsage = async () => {
       try {
-        const token = localStorage.getItem('token')
+        const token = getToken()
         const res = await fetch(`${API_URL}/admin/ai-usage`, {
           headers: {
             Authorization: `Bearer ${token || ''}`,

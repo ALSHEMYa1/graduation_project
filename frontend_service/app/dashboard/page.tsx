@@ -15,6 +15,7 @@ import {
 import { AppShell } from '@/components/layout/app-shell'
 import { useI18n } from '@/components/providers/i18n-provider'
 import { API_URL } from '@/lib/config'
+import { getToken } from '@/lib/auth'
 import { cn } from '@/lib/utils'
 
 const GOAL_HOURS = 20
@@ -33,7 +34,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem('token')
+      const token = getToken()
       if (!token) return
 
       try {

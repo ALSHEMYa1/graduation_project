@@ -1,4 +1,5 @@
 import { API_URL } from './config'
+import { getToken } from './auth'
 
 export const api = {
   getMe: async (token: string) => {
@@ -13,7 +14,7 @@ export const api = {
 }
 
 export async function apiPost(endpoint: string, body: any, timeoutMs = 60000) {
-  const token = localStorage.getItem('token')
+  const token = getToken()
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), timeoutMs)
 

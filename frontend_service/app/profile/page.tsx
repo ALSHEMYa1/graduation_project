@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
 import { api } from '@/lib/api'
 import { API_URL } from '@/lib/config'
+import { getToken } from '@/lib/auth'
 
 export default function ProfilePage() {
   const { t, lang, dir } = useI18n()
@@ -31,7 +32,7 @@ export default function ProfilePage() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const token = localStorage.getItem('token')
+    const token = getToken()
     if (!token) {
       setLoading(false)
       return
@@ -49,7 +50,7 @@ export default function ProfilePage() {
   }, [])
 
   const handleSave = async () => {
-    const token = localStorage.getItem('token')
+    const token = getToken()
     if (!token) return
 
     try {

@@ -6,6 +6,7 @@ import { Search, Brain, AlertTriangle, CheckCircle2, Info, RotateCcw, TrendingUp
 import { AppShell } from '@/components/layout/app-shell'
 import { useI18n } from '@/components/providers/i18n-provider'
 import { API_URL } from '@/lib/config'
+import { getToken } from '@/lib/auth'
 import { apiPost } from '@/lib/api'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -51,7 +52,7 @@ export default function GapAnalysisPage() {
   const [viewSession, setViewSession] = useState<any>(null)
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = getToken()
     if (!token) return
     fetch(`${API_URL}/files`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -153,7 +154,7 @@ export default function GapAnalysisPage() {
   }
 
   const viewSessionDetail = async (id: number) => {
-    const token = localStorage.getItem('token')
+    const token = getToken()
     try {
       const res = await fetch(`${API_URL}/gap-analysis/session/${id}`, {
         headers: { Authorization: `Bearer ${token}` },

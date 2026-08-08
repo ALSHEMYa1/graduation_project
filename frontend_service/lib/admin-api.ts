@@ -1,9 +1,10 @@
 import { API_URL } from './config'
+import { getToken } from './auth'
 
 const BASE = `${API_URL}/admin`
 
 function headers() {
-  const token = localStorage.getItem('token') || ''
+  const token = getToken() || ''
   return {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,

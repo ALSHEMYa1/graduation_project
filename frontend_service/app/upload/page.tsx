@@ -7,6 +7,7 @@ import { Upload, FileText, CheckCircle2, AlertCircle, Loader2, RefreshCw, Trash2
 import { AppShell } from '@/components/layout/app-shell'
 import { useI18n } from '@/components/providers/i18n-provider'
 import { API_URL } from '@/lib/config'
+import { getToken } from '@/lib/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -41,7 +42,7 @@ export default function UploadPage() {
     const trimmed = textContent.trim()
     if (!trimmed) { toast.error('Please enter some text'); return }
     const title = textTitle.trim() || 'Untitled Text'
-    const token = localStorage.getItem('token')
+    const token = getToken()
     if (!token) { toast.error('Login required'); return }
     setSavingText(true)
     try {
@@ -67,7 +68,7 @@ export default function UploadPage() {
 
   const fetchFiles = useCallback(async () => {
     try {
-      const token = localStorage.getItem('token')
+      const token = getToken()
       if (!token) return
       const res = await fetch(`${API_URL}/files`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -82,7 +83,7 @@ export default function UploadPage() {
   useEffect(() => { fetchFiles() }, [fetchFiles])
 
   const deleteFile = async (fileId: number) => {
-    const token = localStorage.getItem('token')
+    const token = getToken()
     if (!token) return
     setDeletingIds((p) => new Set(p).add(fileId))
     try {
@@ -104,7 +105,7 @@ export default function UploadPage() {
     setFiles((p) => p.map((f) => (f.id === id ? { ...f, ...updates } : f)))
 
   const doUpload = useCallback(async (fileItem: UploadedFile) => {
-    const token = localStorage.getItem('token')
+    const token = getToken()
     if (!token) {
       updateFile(fileItem.id, { status: 'error', errorMsg: 'Login required' })
       toast.error('Login required')
@@ -294,7 +295,7 @@ export default function UploadPage() {
                     variant="ghost"
                     size="sm"
                     onClick={async () => {
-                      const token = localStorage.getItem('token')
+                      const token = getToken()
                       if (!token) return
                       try {
                         const res = await fetch(`${API_URL}/files/${ef.id}/download`, {

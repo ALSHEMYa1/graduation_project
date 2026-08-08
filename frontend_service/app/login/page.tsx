@@ -14,6 +14,7 @@ import { useTheme } from 'next-themes'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { API_URL } from '@/lib/config'
+import { setSession } from '@/lib/auth'
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''
 
@@ -25,6 +26,7 @@ function LoginForm() {
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({ email: '', password: '' })
+  const [remember, setRemember] = useState(true)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -46,8 +48,7 @@ function LoginForm() {
 
       const data = await res.json()
 
-      localStorage.setItem('token', data.access_token)
-      localStorage.setItem('token_type', data.token_type)
+      setSession(data.access_token, data.token_type, remember)
 
       toast.success('Logged in successfully')
       router.push('/dashboard')
@@ -77,8 +78,7 @@ function LoginForm() {
       if (!res.ok) throw new Error('Google login failed')
 
       const data = await res.json()
-      localStorage.setItem('token', data.access_token)
-      localStorage.setItem('token_type', data.token_type)
+      setSession(data.access_token, data.token_type, remember)
 
       toast.success('Logged in with Google')
       router.push('/dashboard')
@@ -156,7 +156,16 @@ function LoginForm() {
               </div>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={remember}
+                  onChange={(e) => setRemember(e.target.checked)}
+                  className="w-4 h-4 rounded border-border accent-indigo-600 cursor-pointer"
+                />
+                <span className="text-xs text-muted-foreground">{t('rememberMe')}</span>
+              </label>
               <Link href="/forgot-password" className="text-xs text-primary hover:underline">
                 {t('forgotPassword')}
               </Link>

@@ -8,6 +8,7 @@ import {
   PieChart, Pie, Cell
 } from 'recharts'
 import { API_URL } from '@/lib/config'
+import { getToken } from '@/lib/auth'
 import { useI18n } from '@/components/providers/i18n-provider'
 
 interface AnalyticsData {
@@ -24,7 +25,7 @@ export default function AdminAnalyticsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const token = localStorage.getItem('token') || ''
+    const token = getToken() || ''
     fetch(`${API_URL}/admin/analytics`, {
       headers: { Authorization: `Bearer ${token}` },
     })

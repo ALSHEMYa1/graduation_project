@@ -8,6 +8,7 @@ import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { useI18n } from '@/components/providers/i18n-provider'
 import { API_URL } from '@/lib/config'
+import { getToken } from '@/lib/auth'
 import { LanguageSwitcher } from '@/components/layout/language-switcher'
 import type { TranslationKey } from '@/lib/i18n/translations'
 
@@ -50,7 +51,7 @@ export function AppHeader({ title, showBack = true, onMenuToggle }: AppHeaderPro
   const [initial, setInitial] = useState('A')
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = getToken()
     if (!token) return
     fetch(`${API_URL}/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
