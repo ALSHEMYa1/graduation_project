@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Eye, EyeOff, Moon, Sun } from 'lucide-react'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
@@ -14,7 +14,7 @@ import { useTheme } from 'next-themes'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { API_URL } from '@/lib/config'
-import { setSession } from '@/lib/auth'
+import { getToken, setSession, clearSession } from '@/lib/auth'
 
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''
 
@@ -27,6 +27,19 @@ function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({ email: '', password: '' })
   const [remember, setRemember] = useState(true)
+
+  useEffect(() => {
+    const token = getToken()
+    if (!token) return
+    fetch(`${API_URL}/users/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((r) => {
+        if (r.ok) router.replace('/dashboard')
+        else clearSession()
+      })
+      .catch(() => clearSession())
+  }, [router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -126,11 +139,14 @@ function LoginForm() {
         >
           <h2 className="text-2xl font-bold">{t('login')}</h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4 mt-6">
+          <form onSubmit={handleSubmit} className="space-y-4 mt-6" autoComplete="on">
             <div>
-              <Label>{t('email')}</Label>
+              <Label htmlFor="login-email">{t('email')}</Label>
               <Input
+                id="login-email"
+                name="email"
                 type="email"
+                autoComplete="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 required
@@ -138,10 +154,13 @@ function LoginForm() {
             </div>
 
             <div>
-              <Label>{t('password')}</Label>
+              <Label htmlFor="login-password">{t('password')}</Label>
               <div className="relative">
                 <Input
+                  id="login-password"
+                  name="password"
                   type={showPass ? 'text' : 'password'}
+                  autoComplete="current-password"
                   value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
                   required
