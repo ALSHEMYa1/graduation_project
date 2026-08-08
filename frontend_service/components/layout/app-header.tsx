@@ -144,7 +144,7 @@ export function AppHeader({ title, showBack = true, onMenuToggle }: AppHeaderPro
 
         <Link
           href="/profile"
-          className="w-10 h-10 rounded-xl grad-brand text-white font-black text-lg flex items-center justify-center shadow-md shadow-indigo-500/30 shrink-0"
+          className="w-10 h-10 rounded-xl grad-brand text-white font-black text-lg flex items-center justify-center shadow-sm shrink-0"
           aria-label="Profile"
         >
           {initial}

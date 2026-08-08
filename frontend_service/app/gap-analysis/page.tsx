@@ -192,7 +192,7 @@ export default function GapAnalysisPage() {
 
             {files.length === 0 ? (
               <div className="p-12 border border-dashed rounded-2xl text-center">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-2xl grad-brand text-white flex items-center justify-center shadow-md shadow-indigo-500/30">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-2xl grad-brand text-white flex items-center justify-center shadow-sm">
                   <Brain className="w-6 h-6" />
                 </div>
                 <p className="font-medium">{t('selectDocumentFirst')}</p>

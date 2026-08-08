@@ -105,7 +105,7 @@ export default function ChatPage() {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full grad-brand flex items-center justify-center shadow-md shadow-indigo-500/30">
+            <div className="w-9 h-9 rounded-full grad-brand flex items-center justify-center shadow-sm">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -158,7 +158,7 @@ export default function ChatPage() {
 
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full text-center gap-3">
-              <div className="w-16 h-16 rounded-2xl grad-brand flex items-center justify-center shadow-md shadow-indigo-500/30">
+              <div className="w-16 h-16 rounded-2xl grad-brand flex items-center justify-center shadow-sm">
                 <MessageSquare className="w-8 h-8 text-white" />
               </div>
               <p className="font-semibold text-lg">{t('noMessages')}</p>
@@ -214,7 +214,7 @@ export default function ChatPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex gap-3 max-w-3xl"
             >
-              <div className="w-8 h-8 rounded-full grad-brand flex items-center justify-center shadow-sm shadow-indigo-500/30">
+              <div className="w-8 h-8 rounded-full grad-brand flex items-center justify-center shadow-sm">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div className="px-4 py-3 rounded-2xl bg-card border border-border">

@@ -186,7 +186,7 @@ export default function UploadPage() {
           )}
         >
           <input {...getInputProps()} />
-          <div className="w-12 h-12 mx-auto mb-3 rounded-2xl grad-brand text-white flex items-center justify-center shadow-md shadow-indigo-500/30">
+          <div className="w-12 h-12 mx-auto mb-3 rounded-2xl grad-brand text-white flex items-center justify-center shadow-sm">
             <Upload className="w-6 h-6" />
           </div>
           <p className="font-medium">{isDragActive ? t('dropzoneActive') : t('dropzone')}</p>

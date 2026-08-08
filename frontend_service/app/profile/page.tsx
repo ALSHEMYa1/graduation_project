@@ -108,7 +108,7 @@ export default function ProfilePage() {
         >
           <div className="flex items-center gap-5">
             <div className="relative group">
-              <div className="w-20 h-20 rounded-2xl grad-brand text-white flex items-center justify-center shadow-md shadow-indigo-500/30">
+              <div className="w-20 h-20 rounded-2xl grad-brand text-white flex items-center justify-center shadow-sm">
                 <User className="w-10 h-10" />
               </div>
               <button className="absolute inset-0 rounded-2xl bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

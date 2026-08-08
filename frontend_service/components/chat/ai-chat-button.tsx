@@ -93,7 +93,7 @@ export function AiChatButton() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className={cn(
-          'fixed bottom-5 z-50 w-14 h-14 rounded-2xl grad-brand text-white flex items-center justify-center shadow-xl shadow-indigo-500/40 glow-btn',
+          'fixed bottom-5 z-50 w-14 h-14 rounded-2xl grad-brand text-white flex items-center justify-center shadow-lg glow-btn',
           isRtl ? 'left-5' : 'right-5'
         )}
       >

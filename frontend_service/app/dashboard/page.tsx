@@ -155,8 +155,6 @@ export default function DashboardPage() {
         {/* Hero */}
         <section className="relative overflow-hidden rounded-3xl grad-brand text-white p-6 sm:p-8 card-hover">
           <div className="absolute inset-0 bg-grid opacity-40" />
-          <div className="absolute -top-10 -start-10 w-52 h-52 rounded-full bg-white/20 blur-2xl animate-blob" />
-          <div className="absolute -bottom-16 end-10 w-64 h-64 rounded-full bg-sky-300/30 blur-3xl animate-blob" style={{ animationDelay: '2s' }} />
           <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-5">
             <div>
               <p className="text-sm text-white/80">{t('hello')} 👋</p>
@@ -247,7 +245,7 @@ export default function DashboardPage() {
                   <div
                     className={cn(
                       'w-full max-w-[36px] rounded-lg bar-grow',
-                      i === maxIdx ? 'grad-brand shadow-lg shadow-indigo-500/30' : 'bg-slate-100 dark:bg-white/5'
+                      i === maxIdx ? 'grad-brand' : 'bg-slate-100 dark:bg-white/5'
                     )}
                     style={{ height: `${h * 14}px`, animationDelay: `${i * 0.05}s` }}
                   />

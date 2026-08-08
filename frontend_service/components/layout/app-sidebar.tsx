@@ -81,7 +81,7 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
       {/* Logo */}
       <div className="flex items-center h-14 px-4 shrink-0">
         <Link href="/dashboard" className="flex items-center gap-3 min-w-0" onClick={() => mobile && onMobileClose?.()}>
-          <div className="w-8 h-8 rounded-lg grad-brand flex items-center justify-center shrink-0 shadow-md shadow-indigo-500/30">
+          <div className="w-8 h-8 rounded-lg grad-brand flex items-center justify-center shrink-0 shadow-sm">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 20L8 4L12 20" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M5.5 13.5L10.5 13.5" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
@@ -127,7 +127,7 @@ export function AppSidebar({ collapsed, onToggle, mobileOpen = false, onMobileCl
                     'flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150 group',
                     collapsed && !mobile ? 'justify-center' : '',
                     active
-                      ? 'grad-brand text-white font-semibold shadow-md shadow-indigo-500/25'
+                      ? 'grad-brand text-white font-semibold shadow-sm'
                       : 'text-sidebar-foreground/85 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                   )}
                 >

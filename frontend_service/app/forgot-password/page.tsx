@@ -61,7 +61,7 @@ export default function ForgotPasswordPage() {
         {!sent ? (
           <>
             <div className="mb-8">
-              <div className="w-12 h-12 rounded-2xl grad-brand flex items-center justify-center mb-4 shadow-md shadow-indigo-500/30">
+              <div className="w-12 h-12 rounded-2xl grad-brand flex items-center justify-center mb-4 shadow-sm">
                 <Mail className="w-6 h-6 text-white" />
               </div>
               <h2 className="text-2xl font-bold">{t('forgotPassword')}</h2>
